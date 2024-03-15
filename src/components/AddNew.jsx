@@ -5,6 +5,7 @@ import BottomMenu from './BottomMenu'
 import { v4 } from 'uuid' 
 import { auth } from '../config/FirebaseConfig'
 import { db } from '../config/FirebaseConfig'
+import { format } from 'date-fns'
 import { storage } from '../config/FirebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
@@ -44,7 +45,10 @@ export default function AddNew() {
     };
 
     const onSubmitFlashback = () => {
-        addDoc(flasbacksCollectionRef, { line1: newLine1, line2: newLine2, line3: newLine3, photo: fileUrl, date: currentDate.toLocaleDateString(), time: currentDate.toLocaleTimeString(), userName: auth?.currentUser?.displayName, userId: auth?.currentUser?.uid }).then(() => {
+        const formatedDate = format(currentDate, 'dd.MM.yyyy')
+        const formatedTime = format(currentDate, 'HH:mm:ss')
+
+        addDoc(flasbacksCollectionRef, { line1: newLine1, line2: newLine2, line3: newLine3, photo: fileUrl, date: formatedDate, time: formatedTime, userName: auth?.currentUser?.displayName, userId: auth?.currentUser?.uid }).then(() => {
             setNewLine1('')
             setNewLine2('')
             setNewLine3('')
@@ -84,7 +88,7 @@ export default function AddNew() {
                 <div className='add-form'>
                     <div style={fileUrl != '' ? {backgroundImage: `url('${fileUrl}')`} : {}} className='flash-frame-new'>
                         <div className='data'>
-                            <p className='dt' >{currentDate.toLocaleDateString()}</p>
+                            <p className='dt' >{format(currentDate, 'dd.MM.yyyy')}</p>
                             <p className='author' >{auth?.currentUser?.displayName}</p>
                         </div>
                         <div className='lines'>
