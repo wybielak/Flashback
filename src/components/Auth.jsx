@@ -34,6 +34,7 @@ export default function Auth() {
                     </div>
                 </div>
             </div>
+            <div className='appauthor'>Created by DNw 2024</div>
         </>
     )
 }
