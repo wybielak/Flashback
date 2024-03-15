@@ -1,0 +1,99 @@
+.home-container {
+    margin-top: 70px;
+    margin-bottom: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+/* 
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth; */
+}
+
+.flash-frame {
+    margin: 20px 0;
+    width: 230px;
+    height: 50vh;
+
+    padding: 10px 20px;
+
+    border: 0px solid #242424;
+    border-radius: 20px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+
+    background-position: center !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+
+    position: relative;
+    isolation: isolate;
+    
+    scroll-snap-align: start;
+}
+
+.flash-frame-v1 {
+    background: linear-gradient(45deg, #8685EF, #00B38F 80%);
+}
+
+.flash-frame-v2 {
+    background: linear-gradient(45deg, #8685EF, #D8816F 80%);
+}
+
+.flash-frame-v3 {
+    background: linear-gradient(45deg, #D8816F, #00B38F 80%);
+}
+
+.flash-frame-v4 {
+    background: linear-gradient(45deg, #65FBD2, #2CACBD 80%);
+}
+
+.flash-frame-v5 {
+    background: linear-gradient(45deg, #D8816F, #2CACBD 80%);
+}
+
+.flash-frame-v6 {
+    background: linear-gradient(45deg, #00B38F, #D8816F 80%);
+}
+
+.flash-frame-v7 {
+    background: linear-gradient(45deg, #2CACBD, #8685EF 80%);
+}
+
+.flash-frame-v8 {
+    background: linear-gradient(45deg, #2CACBD, #00B38F 80%);
+}
+
+.flash-frame::after {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: 0;
+    background: radial-gradient(#2424246e, #242424);
+    opacity: 0.7;
+}
+
+.data {
+    width: inherit;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.lines {
+    width: inherit;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: center;
+}
+
+.l1, .l2, .l3 {
+    text-align: right;
+    margin: 5px 0;
+}

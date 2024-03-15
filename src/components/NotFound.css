@@ -1,0 +1,23 @@
+.notfound {
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: end;
+}
+
+.notfound p {
+    margin: 5px;
+}
+
+.notfound .link {
+    font-size: 30px;
+    font-weight: bold;
+    cursor: pointer;
+    align-self: center;
+    text-decoration: none;
+    background: linear-gradient(45deg, #8685EF, #00B38F 80%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}

@@ -1,0 +1,76 @@
+.main-auth-container {
+    width: 100vw;
+    height: 50vh;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.second-auth-container {
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+
+.main-auth-container h1 {
+    margin-bottom: 0;
+    background: linear-gradient(45deg, #8685EF, #00B38F 80%);
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.google-auth h4 {
+    margin: 30px 10px 15px 10px;
+    text-align: center;
+}
+
+.google-auth button {
+    height: 36px;
+    width: 280px;
+    padding: 8px;
+    cursor: pointer;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #3E4145;
+    color: rgba(255, 255, 255, 0.87);
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.google-auth button:active {
+    scale: .90;
+}
+
+.google-auth button div {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: center;
+    justify-content: center;
+}
+
+.google-auth button div span {
+    height: 14px;
+}
+
+.google-auth button .icon-frame {
+    margin: 0px 8px 0px 0px;
+    background-color: white;
+    border: solid;
+    border-radius: 4px;
+}
+
+.google-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url('https://firebasestorage.googleapis.com/v0/b/flashback-57797.appspot.com/o/google.webp?alt=media&token=3764b61d-18eb-470e-a56b-b8eabd4371ed');
+    background-size: contain;
+}
