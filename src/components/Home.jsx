@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
 import BottomMenu from './BottomMenu'
-import { db } from '../config/FirebaseConfig'
-import { getDocs, collection } from 'firebase/firestore'
+import { auth, db } from '../config/FirebaseConfig'
+import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
 
 export default function Home() {
 
@@ -21,7 +21,6 @@ export default function Home() {
     return date
   }
 
-  
   function strToTime(textTi) {
     var timeParts = textTi.split(":");
     var time = new Date();
@@ -57,6 +56,16 @@ export default function Home() {
     }
   }
 
+  const deleteFlashback = async (flashback_id) => {
+    try {
+        const flashbackDoc = doc(db, 'flashbacks', flashback_id)
+        await deleteDoc(flashbackDoc)
+        getFlashbacksList()
+    } catch (err) {
+        console.log(err)
+    }
+}
+
   return (
     <>
       <div className='home-container'>
@@ -71,6 +80,7 @@ export default function Home() {
               <p className='l2' >{flashback.line2}</p>
               <p className='l3' >{flashback.line3}</p>
             </div>
+            {auth?.currentUser?.uid == 'PX2GVRO2wzL1RtJoU0FxuE9nnrh2' ? <button className='moderatorButton' onClick={() => deleteFlashback(flashback.id)}>Delete</button> : null}
           </div>
         ))}
       </div>

@@ -43,3 +43,7 @@
     border: 1px solid transparent;
     border-radius: 25px;
 }
+
+.profile-small p {
+    margin: 0;
+}
