@@ -1,4 +1,4 @@
-import { React, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Home.css'
 import BottomMenu from './BottomMenu'
 import { db } from '../config/FirebaseConfig'
@@ -14,17 +14,42 @@ export default function Home() {
     getFlashbacksList()
   }, [])
 
+  function strToDate(textDt) {
+    var parts = textDt.split(".");
+    var date = new Date(parts[2], parts[1] - 1, parts[0]);
+
+    return date
+  }
+
+  
+  function strToTime(textTi) {
+    var timeParts = textTi.split(":");
+    var time = new Date();
+    time.setHours(timeParts[0]);
+    time.setMinutes(timeParts[1]);
+    time.setSeconds(timeParts[2]);
+
+    return time
+  }
+
   const getFlashbacksList = async () => {
     try {
       const data = await getDocs(flasbacksCollectionRef)
       const filteredData = data.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
 
       filteredData.sort((a, b) => {
-        const dateCompare = b.date.localeCompare(a.date)
-        if (dateCompare === 0) {
-          return b.time.localeCompare(a.time)
-        }
-        return dateCompare
+        const dateA = strToDate(a.date);
+        const dateB = strToDate(b.date);
+        
+        if (dateA > dateB) return -1;
+        if (dateA < dateB) return 1;
+
+        const timeA = strToTime(a.time);
+        const timeB = strToTime(b.time);
+        if (timeA < timeB) return 1;
+        if (timeA > timeB) return -1;
+        
+        return 0;
       })
       setFlashbacksList(filteredData)
     } catch (err) {

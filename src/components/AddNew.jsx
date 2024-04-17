@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import React from 'react'
 import './AddNew.css'
 import BottomMenu from './BottomMenu'
 import { v4 } from 'uuid' 
