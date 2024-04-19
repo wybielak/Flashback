@@ -9,6 +9,7 @@ import { storage } from '../config/FirebaseConfig'
 import { collection, addDoc } from 'firebase/firestore'
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
+import Header from './Header'
 
 export default function AddNew() {
 
@@ -81,6 +82,7 @@ export default function AddNew() {
 
     return (
         <>
+            <Header />
             <div className='addnew-container'>
                 <h1>Utwórz nowy<br /><span>Flashback</span></h1>
                 <p className='subtitle'>Co najbardziej<br />kojarzy ci się ze wspomnieniem?</p>
@@ -103,7 +105,7 @@ export default function AddNew() {
                         <input disabled={ fileUploaded == null ? false : true } style={{ display: 'none' }} type="file"  id='file' accept='image/*' onChange={(e) => setFileUploaded(e.target.files[0])} />
                         <button disabled={ fileUploaded == null || disabled1 ? true : false } onClick={uploadImage}><MdOutlineAddPhotoAlternate /></button>
                     </div>
-                        <button className='upload-button' onClick={onSubmitFlashback}>Utwórz</button>
+                        <button disabled={ fileUploaded != null && !disabled1 ? true : false } className='upload-button' onClick={onSubmitFlashback}>Utwórz</button>
                 </div>
             </div>
             <BottomMenu />

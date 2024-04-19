@@ -1,6 +1,8 @@
 import { useEffect, useState } from 'react'
 import './Home.css'
 import BottomMenu from './BottomMenu'
+import Header from './Header'
+import { IDadmin1 } from '../config/AdminIds'
 import { auth, db } from '../config/FirebaseConfig'
 import { getDocs, collection, deleteDoc, doc } from 'firebase/firestore'
 
@@ -64,10 +66,11 @@ export default function Home() {
     } catch (err) {
         console.log(err)
     }
-}
+  }
 
   return (
     <>
+      <Header />
       <div className='home-container'>
         {flashbacksList.map((flashback, index) => (
           <div style={flashback.photo != '' ? { backgroundImage: `url('${flashback.photo}')` } : {}} className={flashback.photo != '' ? 'flash-frame' : 'flash-frame flash-frame-v' + String(Math.floor(Math.random() * 8) + 1)} key={index}>
@@ -80,7 +83,7 @@ export default function Home() {
               <p className='l2' >{flashback.line2}</p>
               <p className='l3' >{flashback.line3}</p>
             </div>
-            {auth?.currentUser?.uid == 'PX2GVRO2wzL1RtJoU0FxuE9nnrh2' ? <button className='moderatorButton' onClick={() => deleteFlashback(flashback.id)}>Delete</button> : null}
+            {auth?.currentUser?.uid == IDadmin1 ? <button className='moderatorButton' onClick={() => deleteFlashback(flashback.id)}>Delete</button> : null}
           </div>
         ))}
       </div>

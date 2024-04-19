@@ -107,3 +107,11 @@
     border: 2px solid #d8816f;
     border-radius: 5px;
 }
+
+.moderatorButton:active {
+    scale: .90;
+}
+
+.moderatorButton:hover {
+    cursor: pointer;
+}

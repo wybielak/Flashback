@@ -17,6 +17,10 @@
     margin: 15px;
 }
 
+.header-link {
+    display: contents;
+}
+
 .header-title {
     z-index: 3;
     font-size: 20px;

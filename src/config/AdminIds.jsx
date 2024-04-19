@@ -1,0 +1,1 @@
+export const IDadmin1 = 'PX2GVRO2wzL1RtJoU0FxuE9nnrh2'

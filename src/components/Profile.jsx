@@ -1,10 +1,11 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import './Profile.css'
 import BottomMenu from './BottomMenu'
 import { auth } from '../config/FirebaseConfig'
 import { db } from '../config/FirebaseConfig'
 import { signOut } from 'firebase/auth'
 import { getDocs, collection } from 'firebase/firestore'
+import Header from './Header'
 
 export default function Profile() {
 
@@ -14,6 +15,23 @@ export default function Profile() {
     const flasbacksCollectionRef = collection(db, 'flashbacks')
 
     useEffect(() => { getFlashbacksList() }, [])
+
+    function strToDate(textDt) {
+        var parts = textDt.split(".");
+        var date = new Date(parts[2], parts[1] - 1, parts[0]);
+    
+        return date
+      }
+    
+      function strToTime(textTi) {
+        var timeParts = textTi.split(":");
+        var time = new Date();
+        time.setHours(timeParts[0]);
+        time.setMinutes(timeParts[1]);
+        time.setSeconds(timeParts[2]);
+    
+        return time
+      }
 
     const getFlashbacksList = async () => {
         try {
@@ -27,11 +45,18 @@ export default function Profile() {
             })
 
             filteredData2.sort((a, b) => {
-                const dateCompare = b.date.localeCompare(a.date)
-                if (dateCompare === 0) {
-                    return b.time.localeCompare(a.time)
-                }
-                return dateCompare
+                const dateA = strToDate(a.date);
+                const dateB = strToDate(b.date);
+                
+                if (dateA > dateB) return -1;
+                if (dateA < dateB) return 1;
+
+                const timeA = strToTime(a.time);
+                const timeB = strToTime(b.time);
+                if (timeA < timeB) return 1;
+                if (timeA > timeB) return -1;
+                
+                return 0;
             })
             setFlashbacksList(filteredData2)
             setFlashbacksCount(filteredData2.length)
@@ -49,6 +74,7 @@ export default function Profile() {
     }
     return (
         <>
+            <Header />
             <div className='profile-container'>
                 <div className={'profile-background flash-frame-v' + String(Math.floor(Math.random() * 8) + 1)}>
                     <h1>Flashbacks</h1>

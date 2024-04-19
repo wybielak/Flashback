@@ -1,11 +1,12 @@
 import './Header.css'
 import { auth } from '../config/FirebaseConfig'
+import { NavLink } from 'react-router-dom'
 
 export default function Header() {
 
     return (
         <>
-            <h3 className='header-title'>Flashback</h3>
+            <NavLink className='header-link' to="/"><h3 className='header-title'>Flashback</h3></NavLink>
             <div className='header-container'>
                 <div className='profile-small'>
                     <img src={auth?.currentUser?.photoURL} alt="" />
