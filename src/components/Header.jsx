@@ -9,7 +9,9 @@ export default function Header() {
             <NavLink className='header-link' to="/"><h3 className='header-title'>Flashback</h3></NavLink>
             <div className='header-container'>
                 <div className='profile-small'>
-                    <img src={auth?.currentUser?.photoURL} alt="" />
+                    <NavLink className='header-link' to="/profile">
+                        <img src={auth?.currentUser?.photoURL} alt="" />
+                    </NavLink>
                     {auth?.currentUser?.uid == 'PX2GVRO2wzL1RtJoU0FxuE9nnrh2' ? <p><strong>A</strong></p> : null}
                 </div>
                 <p>{auth?.currentUser?.displayName}</p>
