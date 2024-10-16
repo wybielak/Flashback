@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './AddNew.css'
 import BottomMenu from './BottomMenu'
-import { v4 } from 'uuid' 
+import { v4 } from 'uuid'
 import { auth } from '../config/FirebaseConfig'
 import { db } from '../config/FirebaseConfig'
 import { format } from 'date-fns'
@@ -10,6 +10,7 @@ import { collection, addDoc } from 'firebase/firestore'
 import { MdOutlineAddPhotoAlternate } from "react-icons/md";
 import { ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import Header from './Header'
+import { NavLink } from 'react-router-dom'
 
 export default function AddNew() {
 
@@ -69,7 +70,7 @@ export default function AddNew() {
             return
         }
 
-        compressImage(fileUploaded, {quality: 0.1, type: 'image/jpeg'}).then((compressedFile) => {
+        compressImage(fileUploaded, { quality: 0.1, type: 'image/jpeg' }).then((compressedFile) => {
             const imageRef = ref(storage, `flashphotos/${auth?.currentUser?.displayName + v4()}`)
             uploadBytes(imageRef, compressedFile).then(() => {
                 getDownloadURL(imageRef).then((url) => {
@@ -87,7 +88,7 @@ export default function AddNew() {
                 <h1>Utwórz nowy<br /><span>Flashback</span></h1>
                 <p className='subtitle'>Co najbardziej<br />kojarzy ci się ze wspomnieniem?</p>
                 <div className='add-form'>
-                    <div style={fileUrl != '' ? {backgroundImage: `url('${fileUrl}')`} : {}} className='flash-frame-new'>
+                    <div style={fileUrl != '' ? { backgroundImage: `url('${fileUrl}')` } : {}} className='flash-frame-new'>
                         <div className='data'>
                             <p className='dt' >{format(currentDate, 'dd.MM.yyyy')}</p>
                             <p className='author' >{auth?.currentUser?.displayName}</p>
@@ -99,13 +100,16 @@ export default function AddNew() {
                         </div>
                     </div>
                     <div className='buttons'>
-                        <label style={ fileUploaded == null ? {} : {opacity: '0.5', cursor: 'not-allowed'} } htmlFor="file" className="custom-file-upload">
+                        <label style={fileUploaded == null ? {} : { opacity: '0.5', cursor: 'not-allowed' }} htmlFor="file" className="custom-file-upload">
                             Wybierz zdjęcie
                         </label>
-                        <input disabled={ fileUploaded == null ? false : true } style={{ display: 'none' }} type="file"  id='file' accept='image/*' onChange={(e) => setFileUploaded(e.target.files[0])} />
-                        <button disabled={ fileUploaded == null || disabled1 ? true : false } onClick={uploadImage}><MdOutlineAddPhotoAlternate /></button>
+                        <input disabled={fileUploaded == null ? false : true} style={{ display: 'none' }} type="file" id='file' accept='image/*' onChange={(e) => setFileUploaded(e.target.files[0])} />
+                        <button disabled={fileUploaded == null || disabled1 ? true : false} onClick={uploadImage}><MdOutlineAddPhotoAlternate /></button>
                     </div>
-                        <button disabled={ fileUploaded != null && !disabled1 ? true : false } className='upload-button' onClick={onSubmitFlashback}>Utwórz</button>
+                    <NavLink to='/'>
+                        <button disabled={fileUploaded != null && !disabled1 ? true : false} className='upload-button' onClick={onSubmitFlashback}>Utwórz</button>
+                    </NavLink>
+
                 </div>
             </div>
             <BottomMenu />

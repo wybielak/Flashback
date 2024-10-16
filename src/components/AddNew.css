@@ -83,6 +83,10 @@
     scale: .90;
 }
 
+.add-form a {
+    text-decoration: none;
+}
+
 .custom-file-upload {
     width: 140px;
 }
